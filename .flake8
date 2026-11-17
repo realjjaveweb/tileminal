@@ -1,0 +1,8 @@
+[flake8]
+max-line-length = 120
+# Rules black formats differently on purpose
+extend-ignore = E203, E701, E704, W503
+per-file-ignores =
+    # The libraries have to be set up before they are imported
+    src/tileminal/_gi.py: E402
+    tests/ui/driver.py: E402

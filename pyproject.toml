@@ -1,0 +1,76 @@
+[build-system]
+requires = ["setuptools>=77"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "tileminal"
+dynamic = ["version"]
+description = "GTK terminal with tabs, splits and a session that survives restarts"
+readme = "README.md"
+license = "MIT"
+license-files = ["LICENSE"]
+authors = [{ name = "jave.web" }]
+requires-python = ">=3.10"
+# PyGObject with GTK 3 and VTE 2.91 come from the system (preinstalled on Ubuntu desktops)
+dependencies = []
+keywords = ["terminal", "gtk", "vte", "tiling", "splits", "session"]
+classifiers = [
+    "Development Status :: 5 - Production/Stable",
+    "Environment :: X11 Applications :: GTK",
+    "Intended Audience :: Developers",
+    "Operating System :: POSIX :: Linux",
+    "Programming Language :: Python :: 3",
+    "Topic :: Terminals :: Terminal Emulators/X Terminals",
+]
+
+[project.gui-scripts]
+tileminal = "tileminal.app:main"
+
+[tool.setuptools.dynamic]
+version = { attr = "tileminal.__version__" }
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+tileminal = ["icons/*.svg"]
+
+[tool.black]
+line-length = 120
+target-version = ["py310"]
+skip-string-normalization = true
+
+[tool.isort]
+profile = "black"
+line_length = 120
+src_paths = ["src", "tests"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src"]
+
+[tool.mypy]
+python_version = "3.10"
+files = ["src", "tests"]
+mypy_path = "src"
+strict = true
+# PyGObject ships no type information, so GTK classes and their return values are Any
+[[tool.mypy.overrides]]
+module = ["gi", "gi.*", "cairo"]
+ignore_missing_imports = true
+
+[[tool.mypy.overrides]]
+module = [
+    "tileminal._gi",
+    "tileminal.app",
+    "tileminal.dragging",
+    "tileminal.history",
+    "tileminal.layout",
+    "tileminal.pane",
+    "tileminal.session_files",
+    "tileminal.style",
+    "tileminal.widgets",
+    "tileminal.window",
+]
+disallow_subclassing_any = false
+warn_return_any = false

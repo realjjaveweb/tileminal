@@ -1,0 +1,74 @@
+name: tileminal
+title: Tileminal
+base: core24
+summary: Terminal with tabs, splits and a session that survives restarts
+description: |
+  Tileminal is a terminal for working in many shells at once. Split any terminal right or down,
+  rearrange them by dragging, keep several tabs and windows open - and get all of it back after
+  logging out, rebooting or a crash.
+
+  - Splits with title bars, maximize and drag and drop
+  - Every window, tab, split and working directory is restored on the next start
+  - Recently closed terminals, tabs and windows can be reopened
+  - Single tabs can be saved to and opened from session files
+license: MIT
+website: https://github.com/realjjaveweb/tileminal
+source-code: https://github.com/realjjaveweb/tileminal
+issues: https://github.com/realjjaveweb/tileminal/issues
+contact: https://github.com/realjjaveweb/tileminal/issues
+grade: stable
+# A terminal runs the user's own shell with access to everything the user can access
+confinement: classic
+adopt-info: tileminal
+
+apps:
+  tileminal:
+    command: usr/bin/python3 $SNAP/tileminal
+    common-id: io.github.realjjaveweb.Tileminal
+
+parts:
+  tileminal:
+    plugin: dump
+    source: .
+    # Classic snaps must use the libraries they bring, not the ones of the system they run on
+    build-attributes: [enable-patchelf]
+    stage-packages:
+      - libc6
+      - python3
+      - python3-gi
+      - python3-gi-cairo
+      - gir1.2-gtk-3.0
+      - gir1.2-vte-2.91
+      - librsvg2-common
+    build-packages:
+      - libgdk-pixbuf-2.0-0
+    override-pull: |
+      craftctl default
+      # The version comes from the package itself
+      craftctl set version="$(sed -n "s/^__version__ = '\\(.*\\)'/\\1/p" src/tileminal/__init__.py)"
+    override-build: |
+      craftctl default
+      id=io.github.realjjaveweb.Tileminal
+      install -Dm644 data/$id.desktop "$CRAFT_PART_INSTALL/usr/share/applications/$id.desktop"
+      install -Dm644 data/$id.svg "$CRAFT_PART_INSTALL/usr/share/icons/hicolor/scalable/apps/$id.svg"
+      install -Dm644 data/$id.metainfo.xml "$CRAFT_PART_INSTALL/usr/share/metainfo/$id.metainfo.xml"
+    parse-info: [usr/share/metainfo/io.github.realjjaveweb.Tileminal.metainfo.xml]
+    prime:
+      - -.github
+      - -data
+      - -docs
+      - -snap
+      - -tests
+      - -install.sh
+      - -pyproject.toml
+      - -CHANGELOG.md
+      - -README.md
+      - -.editorconfig
+      - -.gitignore
+    override-prime: |
+      craftctl default
+      # The image loaders (SVG icons) are listed with the paths they have once the snap is installed
+      loaders=usr/lib/$CRAFT_ARCH_TRIPLET_BUILD_FOR/gdk-pixbuf-2.0/2.10.0
+      GDK_PIXBUF_MODULEDIR="$CRAFT_PRIME/$loaders/loaders" \
+        /usr/lib/$CRAFT_ARCH_TRIPLET_BUILD_FOR/gdk-pixbuf-2.0/gdk-pixbuf-query-loaders \
+        | sed "s|$CRAFT_PRIME|/snap/tileminal/current|g" > "$CRAFT_PRIME/$loaders/loaders.cache"

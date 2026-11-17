@@ -1,0 +1,200 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: tileminal\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
+
+#: src/tileminal/app.py:67
+msgid "Start without restoring the last session"
+msgstr ""
+
+#: src/tileminal/app.py:74
+msgid "Open a new window in this directory"
+msgstr ""
+
+#: src/tileminal/app.py:82
+msgid "Open a session file as a tab (repeatable)"
+msgstr ""
+
+#: src/tileminal/history.py:25
+msgid "Pane"
+msgstr ""
+
+#: src/tileminal/history.py:25 src/tileminal/history.py:98
+msgid "Tab"
+msgstr ""
+
+#: src/tileminal/history.py:25
+msgid "Window"
+msgstr ""
+
+#: src/tileminal/history.py:45
+msgid "side by side"
+msgstr ""
+
+#: src/tileminal/history.py:45
+msgid "stacked"
+msgstr ""
+
+#: src/tileminal/history.py:33
+msgid "Window, {count} tab"
+msgid_plural "Window, {count} tabs"
+msgstr[0] ""
+msgstr[1] ""
+
+#: src/tileminal/history.py:57 src/tileminal/window.py:113 src/tileminal/window.py:95
+msgid "Recently Closed"
+msgstr ""
+
+#: src/tileminal/history.py:63
+msgid "Clear List"
+msgstr ""
+
+#: src/tileminal/history.py:67
+msgid "Nothing closed yet"
+msgstr ""
+
+#: src/tileminal/pane.py:55 src/tileminal/window.py:69 src/tileminal/window.py:189
+msgid "Rename…"
+msgstr ""
+
+#: src/tileminal/pane.py:65 src/tileminal/pane.py:85
+msgid "Maximize"
+msgstr ""
+
+#: src/tileminal/pane.py:439
+msgid "_Copy"
+msgstr ""
+
+#: src/tileminal/pane.py:440
+msgid "_Paste"
+msgstr ""
+
+#: src/tileminal/pane.py:442
+msgid "Split _Right"
+msgstr ""
+
+#: src/tileminal/pane.py:443
+msgid "Split _Down"
+msgstr ""
+
+#: src/tileminal/pane.py:445
+msgid "Close _Pane"
+msgstr ""
+
+#: src/tileminal/pane.py:67
+msgid "Close"
+msgstr ""
+
+#: src/tileminal/pane.py:69
+msgid "Split Down"
+msgstr ""
+
+#: src/tileminal/pane.py:71
+msgid "Split Right"
+msgstr ""
+
+#: src/tileminal/pane.py:85
+msgid "Restore"
+msgstr ""
+
+#: src/tileminal/pane.py:436
+msgid "_Open Link"
+msgstr ""
+
+#: src/tileminal/pane.py:437
+msgid "Copy _Link"
+msgstr ""
+
+#: src/tileminal/pane.py:423
+msgid "Cannot open {link}: {error}"
+msgstr ""
+
+#: src/tileminal/session_files.py:22
+msgid "Open Tilix Session"
+msgstr ""
+
+#: src/tileminal/session_files.py:22
+msgid "_Open"
+msgstr ""
+
+#: src/tileminal/session_files.py:22 src/tileminal/session_files.py:52
+msgid "_Cancel"
+msgstr ""
+
+#: src/tileminal/session_files.py:25
+msgid "Tilix session (*.json)"
+msgstr ""
+
+#: src/tileminal/session_files.py:52
+msgid "Save Tab as Tilix Session"
+msgstr ""
+
+#: src/tileminal/session_files.py:52
+msgid "_Save"
+msgstr ""
+
+#: src/tileminal/session_files.py:61
+msgid "Cannot save the session"
+msgstr ""
+
+#: src/tileminal/session_files.py:39
+msgid "Cannot open {name}"
+msgstr ""
+
+#: src/tileminal/widgets.py:41
+msgid "Empty shows the terminal title"
+msgstr ""
+
+#: src/tileminal/window.py:197
+msgid "Close Tab"
+msgstr ""
+
+#: src/tileminal/window.py:82
+msgid "Split Right (Ctrl+Shift+E)"
+msgstr ""
+
+#: src/tileminal/window.py:83
+msgid "Split Down (Ctrl+Shift+O)"
+msgstr ""
+
+#: src/tileminal/window.py:84
+msgid "New Tab (Ctrl+Shift+T)"
+msgstr ""
+
+#: src/tileminal/window.py:95
+msgid "New Window"
+msgstr ""
+
+#: src/tileminal/window.py:97
+msgid "Open Tilix Session…"
+msgstr ""
+
+#: src/tileminal/window.py:98
+msgid "Save Tab as Tilix Session…"
+msgstr ""
+
+#: src/tileminal/window.py:100
+msgid "Zoom In"
+msgstr ""
+
+#: src/tileminal/window.py:100
+msgid "Zoom Out"
+msgstr ""
+
+#: src/tileminal/window.py:100
+msgid "Normal Size"
+msgstr ""
+
+#: src/tileminal/window.py:101
+msgid "Open Config File"
+msgstr ""
+
+#: src/tileminal/window.py:101
+msgid "Reload Config"
+msgstr ""
+
+#: src/tileminal/window.py:102
+msgid "Quit All"
+msgstr ""

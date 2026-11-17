@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component type="desktop-application">
+  <id>io.github.realjjaveweb.Tileminal</id>
+  <metadata_license>CC0-1.0</metadata_license>
+  <project_license>MIT</project_license>
+  <name>Tileminal</name>
+  <summary>Terminal with tabs, splits and a session that survives restarts</summary>
+  <developer id="io.github.realjjaveweb">
+    <name>jave.web</name>
+  </developer>
+  <description>
+    <p>
+      Tileminal is a terminal for people who work in many shells at once. Split any terminal right
+      or down, rearrange the panes by dragging them, and keep several tabs and windows open.
+    </p>
+    <ul>
+      <li>Every window, tab, split and working directory comes back after logging out, rebooting or a crash</li>
+      <li>Recently closed panes, tabs and windows can be reopened, with a preview of their layout</li>
+      <li>Tabs and panes show the terminal title or a name of your own</li>
+      <li>Single tabs can be saved to and opened from session files</li>
+      <li>The session file is written safely and earlier versions are kept</li>
+    </ul>
+  </description>
+  <launchable type="desktop-id">io.github.realjjaveweb.Tileminal.desktop</launchable>
+  <url type="homepage">https://github.com/realjjaveweb/tileminal</url>
+  <url type="bugtracker">https://github.com/realjjaveweb/tileminal/issues</url>
+  <screenshots>
+    <screenshot type="default">
+      <caption>Two tabs, one of them split into three terminals</caption>
+      <image>https://raw.githubusercontent.com/realjjaveweb/tileminal/main/docs/screenshot.png</image>
+    </screenshot>
+  </screenshots>
+  <categories>
+    <category>System</category>
+    <category>TerminalEmulator</category>
+  </categories>
+  <content_rating type="oars-1.1"/>
+  <releases>
+    <release version="1.0.0" date="2026-11-17"/>
+  </releases>
+</component>

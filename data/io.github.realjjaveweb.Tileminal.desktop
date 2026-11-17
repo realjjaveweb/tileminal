@@ -1,0 +1,20 @@
+[Desktop Entry]
+Type=Application
+Name=Tileminal
+GenericName=Terminal
+Comment=Terminal with tabs, splits and an autosaved session
+Exec=tileminal
+Icon=io.github.realjjaveweb.Tileminal
+Terminal=false
+StartupNotify=true
+Categories=System;TerminalEmulator;GTK;
+Keywords=shell;prompt;command;commandline;cmd;split;tabs;
+Actions=new-window;fresh;
+
+[Desktop Action new-window]
+Name=New Window
+Exec=tileminal
+
+[Desktop Action fresh]
+Name=Start Without Restoring
+Exec=tileminal --fresh

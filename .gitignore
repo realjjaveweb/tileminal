@@ -1,0 +1,13 @@
+__pycache__/
+*.py[cod]
+build/
+dist/
+*.egg-info/
+.venv/
+.mypy_cache/
+.pytest_cache/
+# Snap builds
+*.snap
+parts/
+stage/
+prime/
