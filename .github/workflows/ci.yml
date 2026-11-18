@@ -62,6 +62,8 @@ jobs:
       - name: Build the snap
         id: build
         run: |
+          # The recipe's scripts call craftctl, which the image keeps outside the default PATH
+          export PATH="/usr/libexec/snapcraft:$PATH"
           snapcraft pack --destructive-mode
           echo "snap=$(ls ./*.snap)" >> "$GITHUB_OUTPUT"
       - uses: actions/upload-artifact@v7
