@@ -34,6 +34,12 @@ parts:
     build-attributes: [enable-patchelf]
     stage-packages:
       - libc6
+      # Packages the base already provides are dropped unless they are listed here, so the whole
+      # interpreter chain is named: the launcher link, the binary and the standard library
+      - python3-minimal
+      - python3.12-minimal
+      - libpython3.12-minimal
+      - libpython3.12-stdlib
       - python3
       - python3-gi
       - python3-gi-cairo
@@ -70,5 +76,6 @@ parts:
       # The image loaders (SVG icons) are listed with the paths they have once the snap is installed
       loaders=usr/lib/$CRAFT_ARCH_TRIPLET_BUILD_FOR/gdk-pixbuf-2.0/2.10.0
       GDK_PIXBUF_MODULEDIR="$CRAFT_PRIME/$loaders/loaders" \
+        LD_LIBRARY_PATH="$CRAFT_PRIME/usr/lib/$CRAFT_ARCH_TRIPLET_BUILD_FOR" \
         /usr/lib/$CRAFT_ARCH_TRIPLET_BUILD_FOR/gdk-pixbuf-2.0/gdk-pixbuf-query-loaders \
         | sed "s|$CRAFT_PRIME|/snap/tileminal/current|g" > "$CRAFT_PRIME/$loaders/loaders.cache"
