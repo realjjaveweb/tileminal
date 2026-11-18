@@ -53,12 +53,17 @@ jobs:
   snap:
     needs: [lint, test, ui]
     if: github.event_name == 'push' && (github.ref == 'refs/heads/main' || startsWith(github.ref, 'refs/tags/v'))
-    # Moved to 24.04 because the setup downloads kept timing out on 26.04
+    # The build runs in Canonical's snapcraft image, so no build tools are downloaded from the
+    # Snap Store while building; the store is only needed to publish
     runs-on: ubuntu-24.04
+    container: ghcr.io/canonical/snapcraft:9_core24
     steps:
       - uses: actions/checkout@v7
-      - uses: snapcore/action-build@v1
+      - name: Build the snap
         id: build
+        run: |
+          snapcraft pack --destructive-mode
+          echo "snap=$(ls ./*.snap)" >> "$GITHUB_OUTPUT"
       - uses: actions/upload-artifact@v7
         with:
           name: tileminal-snap
