@@ -189,3 +189,25 @@ def test_shortcuts(run: Any) -> None:
 def test_session_file_round_trip(run: Any) -> None:
     result = run('session_file')
     assert result == {'tabs': 2, 'same_shape': True}
+
+
+def test_missing_desktop_schema_does_not_abort(tmp_path: Path) -> None:
+    """GSettings aborts the whole process for an unknown schema instead of raising, so a system without the
+    GNOME schemas (minimal installs, CI runners) must be handled before it is asked."""
+    empty = tmp_path / 'empty'
+    empty.mkdir()
+    source = Path(__file__).resolve().parents[2] / 'src'
+    code = (
+        'import sys; sys.path.insert(0, sys.argv[1]); '
+        'from tileminal.style import desktop_setting; '
+        "print(desktop_setting('monospace-font-name'), desktop_setting('no-such-key'))"
+    )
+    result = subprocess.run(
+        [sys.executable, '-c', code, str(source)],
+        env=dict(os.environ, XDG_DATA_DIRS=str(empty), XDG_DATA_HOME=str(empty), GSETTINGS_SCHEMA_DIR=str(empty)),
+        capture_output=True,
+        text=True,
+        timeout=60,
+    )
+    assert result.returncode == 0, result.stderr
+    assert result.stdout.strip() == 'None None'

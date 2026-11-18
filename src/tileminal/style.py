@@ -31,10 +31,19 @@ notebook > header.top > tabs > tab:checked {
 _css_provider: Gtk.CssProvider | None = None
 
 
+DESKTOP_SCHEMA = 'org.gnome.desktop.interface'
+
+
 def desktop_setting(key: str) -> str | None:
+    # GSettings does not raise for a missing schema or key, it aborts the whole process, so both are looked up
+    # first. The GNOME schema is absent on minimal systems and on CI runners, and older versions lack some keys.
+    source = Gio.SettingsSchemaSource.get_default()
+    schema = source.lookup(DESKTOP_SCHEMA, True) if source is not None else None
+    if schema is None or not schema.has_key(key):
+        return None
     try:
-        return Gio.Settings.new('org.gnome.desktop.interface').get_string(key)
-    except Exception:  # the GNOME schema is not installed on every desktop
+        return Gio.Settings.new(DESKTOP_SCHEMA).get_string(key)
+    except Exception:  # e.g. a key of another type
         return None
 
 
