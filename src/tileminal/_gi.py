@@ -19,7 +19,8 @@ gi.require_version('Vte', '2.91')
 
 from gi.repository import Gdk, Gio, GLib, Gtk, Pango, PangoCairo, Vte  # noqa: E402
 
-# Unix signal handling moved from GLib to GLibUnix in GLib 2.80; older systems only have the GLib one
+# Unix signal handling is moving from GLib to GLibUnix; some systems have the GLibUnix namespace
+# without its signal helper in the Python bindings, so callers must check the function itself
 try:
     gi.require_version('GLibUnix', '2.0')
     from gi.repository import GLibUnix  # noqa: E402

@@ -114,7 +114,7 @@ class Application(Gtk.Application):
             self.add_action(action)
 
         for signum in (signal.SIGTERM, signal.SIGHUP, signal.SIGINT):
-            if GLibUnix is not None:
+            if GLibUnix is not None and hasattr(GLibUnix, 'signal_add'):
                 GLibUnix.signal_add(GLib.PRIORITY_HIGH, signum, self.on_signal)
             else:
                 GLib.unix_signal_add(GLib.PRIORITY_HIGH, signum, self.on_signal)
