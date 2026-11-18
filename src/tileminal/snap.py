@@ -55,16 +55,24 @@ def shell_command(argv: list[str]) -> list[str]:
     snap = os.environ.get('SNAP')
     if not snap:
         return argv
-    args = ['/usr/bin/env']
+    unset: list[str] = []
+    assign: list[str] = []
     for name, value in _original.items():
-        args += ['-u', name] if value is None else [f'{name}={value}']
+        if value is None:
+            unset += ['-u', name]
+        else:
+            assign.append(f'{name}={value}')
     for name, value in os.environ.items():
         if name in _original:
             continue
         if name == 'SNAP' or name.startswith('SNAP_'):
-            args += ['-u', name]
+            unset += ['-u', name]
         elif snap in value:
             # e.g. PATH with the snap's folders added in front
             cleaned = _without_snap(value, snap)
-            args += [f'{name}={cleaned}'] if cleaned else ['-u', name]
-    return [*args, *argv]
+            if cleaned:
+                assign.append(f'{name}={cleaned}')
+            else:
+                unset += ['-u', name]
+    # env only reads its options before the first NAME=value, so all of the -u come first
+    return ['/usr/bin/env', *unset, *assign, *argv]

@@ -48,3 +48,6 @@ def test_shells_get_the_users_environment_back(tmp_path: Path) -> None:
     unset = {options[i + 1] for i, option in enumerate(options) if option == '-u'}
     assert {'SNAP', 'SNAP_NAME', 'GI_TYPELIB_PATH', 'GDK_PIXBUF_MODULE_FILE'} <= unset
     assert not any(option.startswith('HOME') for option in options)
+    # env treats everything after the first NAME=value as the command, so no -u may follow one
+    first_assignment = next(i for i, option in enumerate(options) if '=' in option)
+    assert '-u' not in options[first_assignment:]
