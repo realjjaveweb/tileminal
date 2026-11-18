@@ -53,7 +53,8 @@ jobs:
   snap:
     needs: [lint, test, ui]
     if: github.event_name == 'push' && (github.ref == 'refs/heads/main' || startsWith(github.ref, 'refs/tags/v'))
-    runs-on: ubuntu-26.04
+    # Moved to 24.04 because the setup downloads kept timing out on 26.04
+    runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v7
       - uses: snapcore/action-build@v1
