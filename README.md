@@ -1,5 +1,13 @@
 # Tileminal
 
+## Do you like Tileminal?
+
+Star it, watch it, follow it, Share it with a friend! :-) If we can gather sufficient user base,
+<br>we may actually get to release this as a **snap package**! :-)
+
+---
+
+
 A terminal for Linux with tabs, splits, and a memory: close it, reboot, open it again,
 and your windows, tabs, splits and folders are all where you left them.
 
